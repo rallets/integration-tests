@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2026
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-Documentation", "00-Documentation", "{948C89AA-5517-4C16-9D2D-CCA7C41128DC}"
+	ProjectSection(SolutionItems) = preProject
+		00-Documentation\readme.txt = 00-Documentation\readme.txt
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00-Tools", "00-Tools", "{1AC46F7E-8832-4D2B-BBA6-A0FC20AB3652}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-DataContracts", "01-DataContracts", "{39AC4A7A-9082-4412-AD63-C7612B290DC7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06-Tests", "06-Tests", "{3F49E998-53F7-40DA-87AE-4C674FD97B28}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06-WebApi", "06-WebApi", "{9A895EF4-A741-471B-8A92-840D687BF246}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stellar.RestApi", "Stellar.RestApi", "{589F5E80-0010-4375-80E4-B7BED2ACBDC0}"
+	ProjectSection(SolutionItems) = preProject
+		01-DataContracts\Stellar.RestApi.Example\Stellar.RestApi.Example.Models.dll = 01-DataContracts\Stellar.RestApi.Example\Stellar.RestApi.Example.Models.dll
+		01-DataContracts\Stellar.RestApi.Example\update_contracts.bat = 01-DataContracts\Stellar.RestApi.Example\update_contracts.bat
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stellar.RestApi.Tests", "06-Tests\Stellar.RestApi.Tests\Stellar.RestApi.Tests.csproj", "{DB50EFEF-AA50-474E-AC55-8DEBF6B2722C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stellar.RestApi.Example", "06-WebApi\Stellar.RestApi.Example\Stellar.RestApi.Example.csproj", "{00DF27F4-033E-420C-B353-FAFF7DADA317}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stellar.RestApi.Example.Models", "06-WebApi\Stellar.RestApi.Example.Models\Stellar.RestApi.Example.Models.csproj", "{18F72175-9F46-4FF7-A1AF-77AF61659594}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB50EFEF-AA50-474E-AC55-8DEBF6B2722C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB50EFEF-AA50-474E-AC55-8DEBF6B2722C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB50EFEF-AA50-474E-AC55-8DEBF6B2722C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB50EFEF-AA50-474E-AC55-8DEBF6B2722C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00DF27F4-033E-420C-B353-FAFF7DADA317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00DF27F4-033E-420C-B353-FAFF7DADA317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00DF27F4-033E-420C-B353-FAFF7DADA317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00DF27F4-033E-420C-B353-FAFF7DADA317}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18F72175-9F46-4FF7-A1AF-77AF61659594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18F72175-9F46-4FF7-A1AF-77AF61659594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18F72175-9F46-4FF7-A1AF-77AF61659594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18F72175-9F46-4FF7-A1AF-77AF61659594}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{589F5E80-0010-4375-80E4-B7BED2ACBDC0} = {39AC4A7A-9082-4412-AD63-C7612B290DC7}
+		{DB50EFEF-AA50-474E-AC55-8DEBF6B2722C} = {3F49E998-53F7-40DA-87AE-4C674FD97B28}
+		{00DF27F4-033E-420C-B353-FAFF7DADA317} = {9A895EF4-A741-471B-8A92-840D687BF246}
+		{18F72175-9F46-4FF7-A1AF-77AF61659594} = {9A895EF4-A741-471B-8A92-840D687BF246}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {20DC15BA-4C19-42C0-86E7-1AE26214C903}
+	EndGlobalSection
+EndGlobal
