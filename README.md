@@ -1,7 +1,7 @@
 # integration-tests
 Easy and long-term maintainable way to run integration tests through Rest Api and Json.
 
-## CORE project README
+## CORE project
 
 ### Project structure
 The project's folder structure follow the onion/clean architecture pattern. So the complete folder structure should be:
