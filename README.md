@@ -1,29 +1,27 @@
 # integration-tests
-Easy and long-term maintainable way to run integration tests through Rest Api and Json.
+Easy and long-term maintainable way to run integration tests through Rest Apis and Json content.
 
-## CORE project
+Implement your tests without "json strings", without "copying & pasting code", without weak "javascript code", but instead **do reuse your DLL DTOs/models** and write **only strongly typed C#**.
 
-### Project structure
-The project's folder structure follow the onion/clean architecture pattern. So the complete folder structure should be:
-* 00-Documentation
-* 00-Tools: externat tools needed to build/run the project
-* 01-Core: Basic types, extension methods, functionality that can be shared with all layers, like a logger.
-* 02-Domain: Data types related to the "domain", like exceptions, events, domain interfaces, and model interfaces.
-* 03-Service interfaces: Interfaces that will be implemented by the infrastructure or services.
-* 04-Application Services: Services that use one or more infrastructure services to provide a domain logic, implement only interfaces.
-* 05-Infrastructure Services: Services that implement a specific feature. Here there will be communications with the database or REST Apis, with microservices or third-party services, usually towards REST Api.
-* 06-Clients/Frontend: Contains SPA applications or clients that communicate on the bus (like RabbitMQ) that will then use the lower layers for the business / domain logic.
-* 07-Tools: Internal tools, therefore not publicly available, as is the layer 06
+The code is written in C# and ASP.NET and doesn't require a database.
 
-It means that code in level 03 (Service interfaces) connot use code in a upper level, like 04 (Application services).
+## Test example
+```
+public void Clients_get_client_success()
+{
+    var scenario = new DefaultScenario(_logger, country: ECountry.Norway);
+    scenario.PrepareGetClientRequest();
 
-This project is the core to create your own integration tests. See examples for detailed informations.
+    var api = new StellarTestApi<GetClientRequest, GetClientResponse>(_logger);
 
-### Needed improvements
-* create a nuget package, so in a test project the source code (and the dll's hard link) are not needed anymore
-* implement message-bus core functionality
-* improve RestClient to support xml, etc
+    var url = $"{scenario.BaseUrl}v1/clients/{scenario.GetClientRequest.Id}";
 
+    api
+        .SetRequest(scenario.GetClientRequest)
+        .Execute(api.RestClient.GetAsync<GetClientResponse>, url, scenario.DefaultHeaders)
+        .ValidateResponse(IsValidResponse);
+}
+```
 ## EXAMPLE project
 
 ### Project goals
@@ -36,18 +34,18 @@ The goal of this project is to show how to write integration tests that can be:
 * maintainable in the long term (10 years)
 * don't rely on 3rd part tools
 * avoid copy-paste
-* managed by testers
+* manageable by testers without strong coding experience
 
-### How to write integration tests
-We have found a pattern that can solve all the problems we have encountered and that be easily followed.
+### How-to write integration tests
+After implementing hundred of tests, we have found a pattern that can solve all the problems we have encountered and that be easily followed.
 
-The  pattern will help to write tests to check happy scenarios, bad scenarios, and uncommon scenarios like wrongly handmade json bodies.
+**The pattern will help you to write tests to check happy scenarios, bad scenarios, and uncommon scenarios like wrongly handmade json bodies.**
 
-The system could look awkards from a "developer" point-of-view, but it's perfectly correct from a "tester/maintenability" point-of-view.
+*The system could look awkards from a "developer" point-of-view, but it's perfectly correct from a "tester/maintenability" point-of-view.*
 
-We suggest to STRONGLY follow the pattern and naming cobventions. If you cannot follow these, maybe you have problems in your codebase.
+*We suggest to STRONGLY follow the pattern and naming conventions. If you cannot follow these, maybe you have problems in your codebase.*
 
-A common problem is namespaces/classnames conflict, in this case the integration-tests project should bypass the problem.
+*A common problem is namespaces/classnames conflict, in this case the integration-tests project should bypass the problem.*
 
 ### Project structure
 ##### The project structure follow the same convention explained in the Core project.
@@ -83,23 +81,48 @@ Project "Stellar.RestApi.Example.Models" is a project with all the DTOs/Models y
   - the Prepare methods can contain switch cases to implement all the specific behaviours. You don't need private methods, because the code should not be re-usable (otherwise you are doing something wrong).
 
 ### Naming convention
+**See examples for a better understanding**
+
 Clients_get_client_success => Context_HttpMethod_type-of-test
 
 Scenarios has RequestName (AddClient), and "Prepare" + RequestName (PrepareAddClient)
 
-Global variables is named as the type
+Global variables are named as the type.
 
-### Writing a test
+### How-to write a test
 A test should contain:
 * create a new Scenario, use constructor's parameters to specify specific behaviours you need in this specific test
 * A scenario entry-point, basically it's a step behind your test. It will prepare the global request you need in your REST api call.
 * (optional) if you need: override properties in the global request (needed only for bad scenarios or specific tests)
 * call you backend and validate your response
 
-### How setup a integration-tests project
+### How-to setup a integration-tests project
 * Add the DLLs to your DTOs/models, using the DLLs in 01-DataContracts
 * Include the DLLs from the Core project (a nuget package is not available yet)
 * Write your own Scenarios and Tests
+
+## CORE project
+
+### Project structure
+The project's folder structure follow the onion/clean architecture pattern. So the complete folder structure should be:
+* 00-Documentation
+* 00-Tools: externat tools needed to build/run the project
+* 01-Core: Basic types, extension methods, functionality that can be shared with all layers, like a logger.
+* 02-Domain: Data types related to the "domain", like exceptions, events, domain interfaces, and model interfaces.
+* 03-Service interfaces: Interfaces that will be implemented by the infrastructure or services.
+* 04-Application Services: Services that use one or more infrastructure services to provide a domain logic, implement only interfaces.
+* 05-Infrastructure Services: Services that implement a specific feature. Here there will be communications with the database or REST Apis, with microservices or third-party services, usually towards REST Api.
+* 06-Clients/Frontend: Contains SPA applications or clients that communicate on the bus (like RabbitMQ) that will then use the lower layers for the business / domain logic.
+* 07-Tools: Internal tools, therefore not publicly available, as is the layer 06
+
+It means that code in level 03 (Service interfaces) connot use code in a upper level, like 04 (Application services).
+
+This project is the core to create your own integration tests. See examples for detailed informations.
+
+### Needed improvements
+* create a nuget package, so in a test project the source code (and the dll's hard link) are not needed anymore
+* implement message-bus core functionality
+* improve RestClient to support xml, etc
 
 ## References
 [How to implement integration tests/e2e](https://www.stellarsolutions.it/come-implementare-integration-tests-end-to-end/)
